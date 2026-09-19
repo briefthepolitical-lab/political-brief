@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ article["title"] }} | The Political Brief</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="brand">
+            <h1>THE POLITICAL BRIEF</h1>
+            <p>by Ahmed</p>
+        </div>
+
+        <div class="tagline">
+            Global Politics • News • Analysis • Opinion
+        </div>
+
+    </header>
+
+
+    <nav class="navigation">
+
+        <a href="/">Home</a>
+        <a href="#">World</a>
+        <a href="#">Regions</a>
+        <a href="#">Analysis</a>
+        <a href="#">Opinion</a>
+        <a href="#">Fact Check</a>
+        <a href="#">Newsletter</a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <article class="full-article">
+
+            <span class="category">
+                {{ article["category"] }}
+            </span>
+
+            <h2 class="article-title">
+                {{ article["title"] }}
+            </h2>
+
+            <div class="article-meta">
+
+                <span>
+                    By {{ article["author"] }}
+                </span>
+
+                <span>
+                    {{ article["published_at"] }}
+                </span>
+
+            </div>
+
+
+            {% if article["image"] %}
+
+                <img
+                    src="{{ url_for('static', filename='images/' + article['image']) }}"
+                    alt="{{ article['title'] }}"
+                    class="article-main-image"
+                >
+
+            {% endif %}
+
+
+            <div class="article-body">
+
+                {% for paragraph in article["content"].split("\n") %}
+
+                    {% if paragraph.strip() %}
+
+                        <p>
+                            {{ paragraph }}
+                        </p>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
+            {% if article["source"] %}
+
+                <div class="article-source">
+
+                    <strong>Source:</strong>
+                    {{ article["source"] }}
+
+                </div>
+
+            {% endif %}
+
+
+        </article>
+
+
+        <div style="margin-top:40px;">
+
+            <a href="/" style="text-decoration:none;">
+                ← Back to The Political Brief
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <h2>THE POLITICAL BRIEF</h2>
+
+        <p>
+            Global politics • News • Analysis • Opinion
+        </p>
+
+        <p class="copyright">
+            © 2026 The Political Brief by Ahmed
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

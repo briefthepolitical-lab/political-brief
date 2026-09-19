@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category|title }} | The Political Brief</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="brand">
+            <h1>THE POLITICAL BRIEF</h1>
+            <p>by Ahmed</p>
+        </div>
+
+        <div class="tagline">
+            Global Politics • News • Analysis • Opinion
+        </div>
+
+    </header>
+
+
+    <nav class="navigation">
+
+        <a href="/">Home</a>
+        <a href="/category/world">World</a>
+        <a href="/category/asia">Asia</a>
+        <a href="/category/middle%20east">Middle East</a>
+        <a href="/category/europe">Europe</a>
+        <a href="/category/africa">Africa</a>
+        <a href="/category/americas">Americas</a>
+        <a href="/category/analysis">Analysis</a>
+        <a href="/category/opinion">Opinion</a>
+        <a href="/category/fact%20check">Fact Check</a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="intro">
+
+            <p class="section-label">
+                THE POLITICAL BRIEF
+            </p>
+
+            <h2>
+                {{ category|title }}
+            </h2>
+
+            <p>
+                The latest stories published in the
+                {{ category|title }} section of The Political Brief.
+            </p>
+
+        </section>
+
+
+        <section class="news-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Latest {{ category|title }} Stories
+                </h2>
+
+                <span>
+                    {{ category|upper }}
+                </span>
+
+            </div>
+
+
+            {% if articles %}
+
+                <div class="news-grid">
+
+                    {% for article in articles %}
+
+                        <article class="featured-story">
+
+                            {% if article["image"] %}
+
+                                <img
+                                    src="{{ url_for('static', filename='images/' + article['image']) }}"
+                                    alt="{{ article['title'] }}"
+                                    class="article-image"
+                                >
+
+                            {% else %}
+
+                                <div class="placeholder-image">
+                                    THE POLITICAL BRIEF
+                                </div>
+
+                            {% endif %}
+
+
+                            <div class="article-content">
+
+                                <span class="category">
+                                    {{ article["category"] }}
+                                </span>
+
+
+                                <h3>
+
+                                    <a href="{{ url_for('article', slug=article['slug']) }}">
+                                        {{ article["title"] }}
+                                    </a>
+
+                                </h3>
+
+
+                                <p>
+                                    {{ article["content"][:180] }}...
+                                </p>
+
+
+                                <span class="date">
+                                    {{ article["published_at"] }}
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="opinion-card">
+
+                    <h3>
+                        No stories published yet.
+                    </h3>
+
+                    <p>
+                        There are currently no articles in the
+                        {{ category|title }} section.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="newsletter">
+
+            <h2>
+                The Political Brief
+            </h2>
+
+            <p>
+                Get a concise briefing on the world's major
+                political developments.
+            </p>
+
+            <form>
+
+                <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+                <button type="submit">
+                    Subscribe
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <h2>
+            THE POLITICAL BRIEF
+        </h2>
+
+        <p>
+            Global politics • News • Analysis • Opinion
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Editorial Policy</a>
+            <a href="#">Privacy</a>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 The Political Brief by Ahmed
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
