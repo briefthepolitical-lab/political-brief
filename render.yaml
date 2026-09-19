@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: political-brief
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
